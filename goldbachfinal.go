@@ -21,7 +21,9 @@ func isPrime(n int) bool{
 	return true
 	}	
 		
-
+//This function gets all of the prime numbers up until the
+//input n
+//returns an array of those integers
 func sieveOfErat(n int) []int{
 	primes := make([]int, 0)
 	sieve := make([]bool, n+1)
@@ -35,16 +37,8 @@ func sieveOfErat(n int) []int{
     }
     return primes
 }
-
-
-func makeList(n int) []int{
-	a := make([]int, n-2+1)
-	for i := range a {
-		a[i] = 2 + i
-		}
-	return a
-	}
-
+//Does the goldbach conjecture
+//accepts an input returns a set of arrays in an array called results
 func Goldbach(n int)[][]int{
 	num := n
 	primes := sieveOfErat(num)
@@ -52,6 +46,7 @@ func Goldbach(n int)[][]int{
 	for _, p := range primes{
 		if isPrime(num - p){
 			stop := false
+			//NOTE:This removes all repitions from the output
 			for _, pair := range results{
 				if pair[0] == p || pair[1] == p || pair[0] == n-p || pair[1] == n-p{
 				stop = true
@@ -66,12 +61,12 @@ func Goldbach(n int)[][]int{
 		}
 		return results
 	}
-func main(){
-	//fmt.Println("Enter a number greater than 2: ")
-	
-	//var num int
-	
-	//fmt.Scanln(&num)
+//Main function contains alot of boilerplate
+//calls necessary to read from and
+//write to a file
+//Main calls Goldbach and rights the outpu 'results' to a file
+//It works with a file of any length
+	func main(){
 	file,err := os.Open("data.txt")
 	if err != nil {
 		fmt.Println(err)
